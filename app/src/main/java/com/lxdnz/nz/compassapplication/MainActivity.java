@@ -179,14 +179,14 @@ public class MainActivity extends Activity implements SensorEventListener, Locat
         // get accelerometer data
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             // we need to use a low pass filter to make data smoothed
-            smoothed = LowPassFilter.filter(event.values, gravity);
+            smoothed = new LowPass().filter(event.values, gravity);
             gravity[0] = smoothed[0];
             gravity[1] = smoothed[1];
             gravity[2] = smoothed[2];
             accelOrMagnetic = true;
 
         } else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
-            smoothed = LowPassFilter.filter(event.values, geomagnetic);
+            smoothed = new LowPass().filter(event.values, geomagnetic);
             geomagnetic[0] = smoothed[0];
             geomagnetic[1] = smoothed[1];
             geomagnetic[2] = smoothed[2];
